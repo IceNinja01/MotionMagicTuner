@@ -1,0 +1,416 @@
+{
+  "dividerPosition": 0.20845697329376855,
+  "tabPane": [
+    {
+      "title": "SmartDashboard",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "1,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Position",
+              "_title": "Position",
+              "Visible time": 30.0
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Current",
+              "_title": "Current"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Voltage",
+              "_title": "Voltage"
+            }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/k_p",
+              "_title": "k_p"
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/k_f",
+              "_title": "k_f"
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/k_i",
+              "_title": "k_i"
+            }
+          },
+          "2,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/k_d",
+              "_title": "k_d"
+            }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Auto mode",
+              "_title": "Auto mode"
+            }
+          },
+          "3,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Error",
+              "_title": "Error",
+              "Visible time": 30.0
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RawAngle_FrontLeft",
+              "_title": "RawAngle_FrontLeft"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RawAngle_BackRight",
+              "_title": "RawAngle_BackRight"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RawAngle_FrontRight",
+              "_title": "RawAngle_FrontRight"
+            }
+          },
+          "3,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RawAngle_BackLeft",
+              "_title": "RawAngle_BackLeft"
+            }
+          },
+          "4,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BackLeft",
+              "_title": "BackLeft"
+            }
+          },
+          "5,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FrontRight",
+              "_title": "FrontRight"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BackRight",
+              "_title": "BackRight"
+            }
+          },
+          "0,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FrontLeft",
+              "_title": "FrontLeft"
+            }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IMU",
+              "_title": "IMU"
+            }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro Angle",
+              "_title": "Gyro Angle"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/SpeedFrontRight",
+              "_title": "SpeedFrontRight"
+            }
+          },
+          "5,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/SpeedFrontLeft",
+              "_title": "SpeedFrontLeft"
+            }
+          },
+          "6,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/SpeedBackLeft",
+              "_title": "SpeedBackLeft"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "LiveWindow",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "LiveWindow/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Ungrouped",
+              "_children": []
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Ungrouped",
+              "_children": []
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Ungrouped",
+              "_children": []
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Ungrouped",
+              "_children": []
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "ExampleSubsystem",
+              "_children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "PID Tuning",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "PID Tuning",
+              "_children": [
+                {
+                  "_type": "Number Slider",
+                  "_source0": "network_table:///Preferences/Kf",
+                  "_title": "Preferences/Kf",
+                  "min": -1.0,
+                  "max": 1.0,
+                  "blockIncrement": 0.0625
+                },
+                {
+                  "_type": "Number Slider",
+                  "_source0": "network_table:///Preferences/Kp",
+                  "_title": "Preferences/Kp",
+                  "min": -1.0,
+                  "max": 1.0,
+                  "blockIncrement": 0.0625
+                },
+                {
+                  "_type": "Number Slider",
+                  "_source0": "network_table:///Preferences/Ki",
+                  "_title": "Preferences/Ki",
+                  "min": -1.0,
+                  "max": 1.0,
+                  "blockIncrement": 0.0625
+                },
+                {
+                  "_type": "Number Slider",
+                  "_source0": "network_table:///Preferences/Kd",
+                  "_title": "Preferences/Kd",
+                  "min": -1.0,
+                  "max": 1.0,
+                  "blockIncrement": 0.0625
+                }
+              ]
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "List",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Acceleration",
+                  "_title": "Preferences/Acceleration"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Cruise Velocity",
+                  "_title": "Preferences/Cruise Velocity"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Min Position",
+                  "_title": "Preferences/Min Position"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Max Position",
+                  "_title": "Preferences/Max Position"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

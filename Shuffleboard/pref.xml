@@ -1,0 +1,40 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
+		<location x="0" y="268"/>
+	</static-widget>
+	<widget field="Scheduler" type="Scheduler" class="edu.wpi.first.smartdashboard.gui.elements.Scheduler">
+		<location x="186" y="115"/>
+	</widget>
+	<widget field="Error" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="16" y="156"/>
+	</widget>
+	<widget field="k_p" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="11" y="122"/>
+		<width>102</width>
+	</widget>
+	<widget field="Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="26" y="87"/>
+	</widget>
+	<widget field="k_i" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="18" y="249"/>
+	</widget>
+	<widget field="k_d" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="31" y="66"/>
+	</widget>
+	<widget field="k_f" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="22" y="203"/>
+	</widget>
+	<widget field="Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="22" y="42"/>
+	</widget>
+	<widget field="Position" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="16" y="0"/>
+	</widget>
+</dashboard>
+<live-window>
+	<widget field="Ungrouped" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
+		<location x="26" y="5"/>
+	</widget>
+</live-window>
+</xml>

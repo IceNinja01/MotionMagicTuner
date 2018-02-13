@@ -58,9 +58,9 @@ public class Robot extends IterativeRobot {
         ki = prefs.getDouble("Ki", 0.00);
         kd = prefs.getDouble("Kd", 0.2);
     	//Setup for Motion Magic
-    	maxVel = prefs.getInt("CrusieVelocity", 1); //RPSec input
-    	maxVel *= (7.5*4096)/125;; //convert to native units
-    	accel = prefs.getInt("Acceleration", 1); //RPSec input
+    	maxVel = prefs.getInt("CrusieVelocity", 1); //Inches/Sec input
+    	maxVel *= (7.5*4096)/125;; //convert to native units, 
+    	accel = prefs.getInt("Acceleration", 1); //Inches/Sec input
     	accel *= (7.5*4096)/125;; //convert to native units
     	minPosition = prefs.getDouble("MinPosition", 0.00);
     	maxPosition = prefs.getDouble("MaxPosition", 0.0); //Rotations 12.5in per wheel rotation; 7.5 is equal to 1 full rotation
@@ -107,9 +107,9 @@ public class Robot extends IterativeRobot {
         _talon.config_kI(0, ki, 10);
         _talon.config_kD(0, kd, 10);
        	//Setup for Motion Magic
-    	maxVel = prefs.getDouble("Cruise Velocity", 1.0); //RPSec input
+    	maxVel = prefs.getDouble("Cruise Velocity", 1.0); //Inches/Sec input
     	maxVel *= (7.5*4096)/125; //convert to native units
-    	accel = prefs.getDouble("Acceleration", 1.0); //RPSec input
+    	accel = prefs.getDouble("Acceleration", 1.0); //Inches/Sec input
     	accel *= (7.5*4096)/125; //convert to native units
     	_talon.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
     	_talon.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
@@ -126,16 +126,9 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 	
 		/* get gamepad axis */
-		double leftYstick = _joy.getY(Hand.kLeft);
 		double motorOutput = _talon.getMotorOutputPercent();
 		boolean button1 = _joy.getRawButton(1);
 		boolean button2 = _joy.getRawButton(2);
-		/* deadband gamepad */
-		if (Math.abs(leftYstick) < 0.10) {
-			/* within 10% of zero */
-			leftYstick = 0;
-
-		}
 		/* prepare line to print */
 		_sb.append("\tout:");
 		/* cast to int to remove decimal places */
@@ -146,29 +139,23 @@ public class Robot extends IterativeRobot {
 		_sb.append(_talon.getSelectedSensorPosition(0));
 		_sb.append("u"); /* units */
 
-		/* on button1 press enter closed-loop mode on target position */
-		if (_lastButton1 && button1) {
+		/* on button2 press enter closed-loop mode on target position */
+		if (_lastButton2 && button2) {
 			/* Position mode - button just pressed */
-	    	_talon.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
-	    	_talon.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
 			targetPositionRotations = maxPosition;
 			_talon.set(ControlMode.MotionMagic, targetPositionRotations);
 
 		}
 		/* on button1 press enter closed-loop mode on target position */
-		if (_lastButton2 && button2) {
+		if (_lastButton1 && button1) {
 			/* Position mode - button just pressed */
-	    	_talon.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
-	    	_talon.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
+
 			/* 10 Rotations * 4096 u/rev in either direction */
 			targetPositionRotations = minPosition;
 			_talon.set(ControlMode.MotionMagic, targetPositionRotations);
 
 		}
-//		else {
-//			/* Percent voltage mode */
-//			_talon.set(ControlMode.PercentOutput, leftYstick);
-//		}
+
 		/* if Talon is in position closed-loop, print some more info */
 		if (_talon.getControlMode() == ControlMode.MotionMagic) {
 			/* append more signals to print when in speed mode. */
