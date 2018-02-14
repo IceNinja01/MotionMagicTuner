@@ -97,7 +97,12 @@ public class Robot extends IterativeRobot {
     	
 		
 	}
+	public void disabledInit() {
+		_talon.set(ControlMode.PercentOutput, 0);
+
+	}
 	public void disabledPeriodic() {
+		
 
 	}
 	public void teleopInit() {
