@@ -34,6 +34,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	TalonSRX _talon = new TalonSRX(0);
+	TalonSRX _talon1 = new TalonSRX(14);
+	TalonSRX _talon2 = new TalonSRX(1);
+	TalonSRX _talon3 = new TalonSRX(15);
 	XboxController _joy = new XboxController(0);
 	StringBuilder _sb = new StringBuilder();
 	int _loops = 0;
@@ -70,26 +73,59 @@ public class Robot extends IterativeRobot {
 		/* choose the sensor and sensor direction */
 		_talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
 				Constants.kTimeoutMs);
+		_talon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
+				Constants.kTimeoutMs);
+		_talon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
+				Constants.kTimeoutMs);
+		_talon3.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
+				Constants.kTimeoutMs);
 
 		/* choose to ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(Constants.kSensorPhase);
+		_talon1.setSensorPhase(Constants.kSensorPhase);
+		_talon2.setSensorPhase(Constants.kSensorPhase);
+		_talon3.setSensorPhase(Constants.kSensorPhase);
 		/* choose based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. */ 
 		_talon.setInverted(Constants.kMotorInvert);
 		_talon.selectProfileSlot(0, 0);
+		_talon1.setInverted(Constants.kMotorInvert);
+		_talon1.selectProfileSlot(0, 0);
+		_talon2.setInverted(Constants.kMotorInvert);
+		_talon2.selectProfileSlot(0, 0);
+		_talon3.setInverted(Constants.kMotorInvert);
+		_talon3.selectProfileSlot(0, 0);
 		/* set the peak and nominal outputs, 12V means full */
 		_talon.configNominalOutputForward(0, Constants.kTimeoutMs);
 		_talon.configNominalOutputReverse(0, Constants.kTimeoutMs);
 		_talon.configPeakOutputForward(11, Constants.kTimeoutMs);
 		_talon.configPeakOutputReverse(-11, Constants.kTimeoutMs);
+		_talon1.configNominalOutputForward(0, Constants.kTimeoutMs);
+		_talon1.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		_talon1.configPeakOutputForward(11, Constants.kTimeoutMs);
+		_talon1.configPeakOutputReverse(-11, Constants.kTimeoutMs);
+		_talon2.configNominalOutputForward(0, Constants.kTimeoutMs);
+		_talon2.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		_talon2.configPeakOutputForward(11, Constants.kTimeoutMs);
+		_talon2.configPeakOutputReverse(-11, Constants.kTimeoutMs);
+		_talon3.configNominalOutputForward(0, Constants.kTimeoutMs);
+		_talon3.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		_talon3.configPeakOutputForward(11, Constants.kTimeoutMs);
+		_talon3.configPeakOutputReverse(-11, Constants.kTimeoutMs);
 		/*
 		 * set the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
 		_talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);	
-
+		_talon1.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);	
+		_talon2.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);	
+		_talon3.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);	
+		
     	_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
+    	_talon1.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
+    	_talon2.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
+    	_talon3.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
     	
 		
 	}
@@ -106,6 +142,18 @@ public class Robot extends IterativeRobot {
         _talon.config_kP(0, kp, 10);
         _talon.config_kI(0, ki, 10);
         _talon.config_kD(0, kd, 10);
+        _talon1.config_kF(0, kf, 10);
+        _talon1.config_kP(0, kp, 10);
+        _talon1.config_kI(0, ki, 10);
+        _talon1.config_kD(0, kd, 10);
+        _talon2.config_kF(0, kf, 10);
+        _talon2.config_kP(0, kp, 10);
+        _talon2.config_kI(0, ki, 10);
+        _talon2.config_kD(0, kd, 10);
+        _talon3.config_kF(0, kf, 10);
+        _talon3.config_kP(0, kp, 10);
+        _talon3.config_kI(0, ki, 10);
+        _talon3.config_kD(0, kd, 10);
        	//Setup for Motion Magic
     	maxVel = prefs.getDouble("Cruise Velocity", 1.0); //Inches/Sec input
     	maxVel *= (7.5*4096)/125; //convert to native units
@@ -113,12 +161,21 @@ public class Robot extends IterativeRobot {
     	accel *= (7.5*4096)/125; //convert to native units
     	_talon.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
     	_talon.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
+    	_talon1.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
+    	_talon1.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
+    	_talon2.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
+    	_talon2.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
+    	_talon3.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
+    	_talon3.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
     	minPosition = prefs.getDouble("Min Position", 0.00);
     	maxPosition = prefs.getDouble("Max Position", 0.0); //Rotations
     	minPosition *= 7.5*4096/12.5;
     	maxPosition *= 7.5*4096/12.5;
     	_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
-
+    	_talon1.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    	_talon2.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    	_talon3.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    	
 	}
 	/**
 	 * This function is called periodically during operator control
@@ -144,6 +201,9 @@ public class Robot extends IterativeRobot {
 			/* Position mode - button just pressed */
 			targetPositionRotations = maxPosition;
 			_talon.set(ControlMode.MotionMagic, targetPositionRotations);
+			_talon1.set(ControlMode.MotionMagic, targetPositionRotations);
+			_talon2.set(ControlMode.MotionMagic, targetPositionRotations);
+			_talon3.set(ControlMode.MotionMagic, targetPositionRotations);
 
 		}
 		/* on button1 press enter closed-loop mode on target position */
@@ -153,7 +213,10 @@ public class Robot extends IterativeRobot {
 			/* 10 Rotations * 4096 u/rev in either direction */
 			targetPositionRotations = minPosition;
 			_talon.set(ControlMode.MotionMagic, targetPositionRotations);
-
+			_talon1.set(ControlMode.MotionMagic, targetPositionRotations);
+			_talon2.set(ControlMode.MotionMagic, targetPositionRotations);
+			_talon3.set(ControlMode.MotionMagic, targetPositionRotations);
+			
 		}
 
 		/* if Talon is in position closed-loop, print some more info */
