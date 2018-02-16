@@ -53,6 +53,8 @@ public class Robot extends IterativeRobot {
 	private double maxVel;
 	private double accel;
 	private double rotPerInch;
+	private boolean button1;
+	private boolean button2;
 
 	public void robotInit() {
 		prefs = Preferences.getInstance();
@@ -61,7 +63,7 @@ public class Robot extends IterativeRobot {
         kp = prefs.getDouble("Kp", 0.5);
         ki = prefs.getDouble("Ki", 0.00);
         kd = prefs.getDouble("Kd", 0.2);
-        rotPerInch = prefs.getDouble("RotPerInches", 1.0);
+        rotPerInch = prefs.getDouble("RotPerInches", 0.6);
     	//Setup for Motion Magic
     	maxVel = prefs.getInt("CrusieVelocity", 1); //Inches/Sec input
 
@@ -137,9 +139,19 @@ public class Robot extends IterativeRobot {
 	}
 	public void disabledInit() {
 		_talon.set(ControlMode.PercentOutput, 0);
+		button1 = _joy.getRawButton(5); // left top bumper
+		button2 = _joy.getRawButton(6); // right top bumper
+		/* save button state for on press detect */
+		_lastButton1 = button1;
+		_lastButton2 = button2;
 
 	}
 	public void disabledPeriodic() {
+		button1 = _joy.getRawButton(5); // left top bumper
+		button2 = _joy.getRawButton(6); // right top bumper
+		/* save button state for on press detect */
+		_lastButton1 = button1;
+		_lastButton2 = button2;
 		
 
 	}
@@ -182,10 +194,10 @@ public class Robot extends IterativeRobot {
     	maxPosition = prefs.getDouble("Max Position", 0.0); //Rotations
     	minPosition *= 7.5*4096/12.5;
     	maxPosition *= 7.5*4096/12.5;
-    	_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
-    	_talon1.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
-    	_talon2.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
-    	_talon3.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+//    	_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
+//    	_talon1.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+//    	_talon2.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+//    	_talon3.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     	
 	}
 	/**
@@ -196,8 +208,8 @@ public class Robot extends IterativeRobot {
 		double leftYstick = -1.0 * _joy.getY();
 		/* get gamepad axis */
 		double motorOutput = _talon.getMotorOutputPercent();
-		boolean button1 = _joy.getRawButton(5); // left top bumper
-		boolean button2 = _joy.getRawButton(6); // right top bumper
+		button1 = _joy.getRawButton(5); // left top bumper
+		button2 = _joy.getRawButton(6); // right top bumper
 		/* prepare line to print */
 		_sb.append("\tout:");
 		/* cast to int to remove decimal places */
