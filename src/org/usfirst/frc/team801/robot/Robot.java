@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
 	private boolean _lastButton2;
 	private double maxVel;
 	private double accel;
+	private double rotPerInch;
 
 	public void robotInit() {
 		prefs = Preferences.getInstance();
@@ -60,15 +61,24 @@ public class Robot extends IterativeRobot {
         kp = prefs.getDouble("Kp", 0.5);
         ki = prefs.getDouble("Ki", 0.00);
         kd = prefs.getDouble("Kd", 0.2);
+        rotPerInch = prefs.getDouble("RotPerInches", 1.0);
     	//Setup for Motion Magic
     	maxVel = prefs.getInt("CrusieVelocity", 1); //Inches/Sec input
+<<<<<<< HEAD
     	maxVel *= (7.5*4096)/125; //convert to native units, 
     	accel = prefs.getInt("Acceleration", 1); //Inches/Sec input
     	accel *= (7.5*4096)/125; //convert to native units
+=======
+    	maxVel *= rotPerInch;
+    	maxVel *= (4096)/10; //convert to native units, 
+    	accel = prefs.getInt("Acceleration", 1); //Inches/Sec input
+    	accel *= rotPerInch; 
+    	accel *= 4096/10;; //convert to native units
+>>>>>>> 6f6e9b7f68216c3f93a0e877499f13f6d78be3b2
     	minPosition = prefs.getDouble("MinPosition", 0.00);
     	maxPosition = prefs.getDouble("MaxPosition", 0.0); //Rotations 12.5in per wheel rotation; 7.5 is equal to 1 full rotation
-    	minPosition *= 7.5*4096/12.5;
-    	maxPosition *= 7.5*4096/12.5;	               
+    	minPosition *= rotPerInch*4096;
+    	maxPosition *= rotPerInch*4096;	               
 		SmartDashboard.putData(Scheduler.getInstance()); //Displaying the Scheduler status
 		/* choose the sensor and sensor direction */
 		_talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
@@ -129,7 +139,12 @@ public class Robot extends IterativeRobot {
     	
 		
 	}
+	public void disabledInit() {
+		_talon.set(ControlMode.PercentOutput, 0);
+
+	}
 	public void disabledPeriodic() {
+		
 
 	}
 	public void teleopInit() {
@@ -181,11 +196,12 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-	
+		/* get gamepad axis - forward stick is positive */
+		double leftYstick = -1.0 * _joy.getY();
 		/* get gamepad axis */
 		double motorOutput = _talon.getMotorOutputPercent();
-		boolean button1 = _joy.getRawButton(1);
-		boolean button2 = _joy.getRawButton(2);
+		boolean button1 = _joy.getRawButton(5); // left top bumper
+		boolean button2 = _joy.getRawButton(6); // right top bumper
 		/* prepare line to print */
 		_sb.append("\tout:");
 		/* cast to int to remove decimal places */
@@ -207,7 +223,7 @@ public class Robot extends IterativeRobot {
 
 		}
 		/* on button1 press enter closed-loop mode on target position */
-		if (_lastButton1 && button1) {
+		else if (_lastButton1 && button1) {
 			/* Position mode - button just pressed */
 
 			/* 10 Rotations * 4096 u/rev in either direction */
@@ -217,6 +233,11 @@ public class Robot extends IterativeRobot {
 			_talon2.set(ControlMode.MotionMagic, targetPositionRotations);
 			_talon3.set(ControlMode.MotionMagic, targetPositionRotations);
 			
+		}
+		
+		else {
+			/* Percent voltage mode */
+			_talon.set(ControlMode.PercentOutput, leftYstick);
 		}
 
 		/* if Talon is in position closed-loop, print some more info */
