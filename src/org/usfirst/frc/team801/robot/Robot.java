@@ -62,9 +62,9 @@ public class Robot extends IterativeRobot {
         kd = prefs.getDouble("Kd", 0.2);
     	//Setup for Motion Magic
     	maxVel = prefs.getInt("CrusieVelocity", 1); //Inches/Sec input
-    	maxVel *= (7.5*4096)/125;; //convert to native units, 
+    	maxVel *= (7.5*4096)/125; //convert to native units, 
     	accel = prefs.getInt("Acceleration", 1); //Inches/Sec input
-    	accel *= (7.5*4096)/125;; //convert to native units
+    	accel *= (7.5*4096)/125; //convert to native units
     	minPosition = prefs.getDouble("MinPosition", 0.00);
     	maxPosition = prefs.getDouble("MaxPosition", 0.0); //Rotations 12.5in per wheel rotation; 7.5 is equal to 1 full rotation
     	minPosition *= 7.5*4096/12.5;
