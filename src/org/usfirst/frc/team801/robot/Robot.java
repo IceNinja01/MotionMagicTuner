@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
         kp = prefs.getDouble("Kp", 0.5);
         ki = prefs.getDouble("Ki", 0.00);
         kd = prefs.getDouble("Kd", 0.2);
-        rotPerInch = prefs.getDouble("RotPerInches", 0.6);
+        rotPerInch = prefs.getDouble("RotPerInches", 1.0);
     	//Setup for Motion Magic
     	maxVel = prefs.getInt("CrusieVelocity", 25); //Inches/Sec input
 
@@ -179,9 +179,9 @@ public class Robot extends IterativeRobot {
 //        _talon3.config_kD(0, kd, 10);
        	//Setup for Motion Magic
     	maxVel = prefs.getDouble("Cruise Velocity", 1.0); //Inches/Sec input
-    	maxVel *= (7.5*4096)/125; //convert to native units
+    	maxVel *= (rotPerInch*4096)/10; //convert to native units
     	accel = prefs.getDouble("Acceleration", 1.0); //Inches/Sec input
-    	accel *= (7.5*4096)/125; //convert to native units
+    	accel *= (rotPerInch*4096)/10; //convert to native units
     	_talon.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
     	_talon.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
 //    	_talon1.configMotionCruiseVelocity((int) maxVel, Constants.kTimeoutMs);
@@ -192,8 +192,8 @@ public class Robot extends IterativeRobot {
 //    	_talon3.configMotionAcceleration((int)accel, Constants.kTimeoutMs);
     	minPosition = prefs.getDouble("Min Position", 0.00);
     	maxPosition = prefs.getDouble("Max Position", 0.0); //Rotations
-    	minPosition *= 7.5*4096/12.5;
-    	maxPosition *= 7.5*4096/12.5;
+    	minPosition *= (rotPerInch*4096);
+    	maxPosition *= (rotPerInch*4096);
 //    	_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); 
 //    	_talon1.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 //    	_talon2.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
